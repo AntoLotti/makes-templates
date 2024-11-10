@@ -4,6 +4,10 @@
 #
 #****************************************
 
+#** CONTROL FLAGS ***********************
+
+DEBUG = 1
+
 #** PATHS *******************************
 
 #Source         Folder Path
@@ -27,12 +31,12 @@ MODULE_1_NAME   = main
 SRC_1   =   $(SRC_DIR)/$(MODULE_1_NAME).c
 OBJ_1   =   $(OBJS_DIR)/$(MODULE_1_NAME).o
 #SOURCE 2
-#MODULE_2_NAME   =
-#SRC_2   =   $(MODULE_2_NAME).c
-#OBJ_2   =   $(OBJS_DIR)/$(MODULE_2_NAME).o
+MODULE_2_NAME   = fsm
+SRC_2   =   $(SRC_DIR)/$(MODULE_2_NAME).c
+OBJ_2   =   $(OBJS_DIR)/$(MODULE_2_NAME).o
 #SOURCE 3
 #MODULE_3_NAME   =
-#SRC_3   =   $(MODULE_3_NAME).c
+#SRC_3   =   $(SRC_DIR)/$(MODULE_3_NAME).c
 #OBJ_3   =   $(OBJS_DIR)/$(MODULE_3_NAME).o
 
 
@@ -63,7 +67,7 @@ WALL	=	-Wall -Wextra -Werror -Wwrite-strings -Wno-parentheses -pedantic \
 
 #** INCLUDES ****************************
 
-INC     = -I./ -I/$(INC_DIR)
+INC     = -I./ -I $(INC_DIR)/
 
 
 #** LIBRARIES ***************************
@@ -79,14 +83,14 @@ RPATH	="-Wl,-rpath,$(LIB_DIR)"
 #Pre proccesor Flags
 #CPPFLAGS        =    
 #Compiler Flags
-CFLAGS          =   $(INC) $(STDFLAG)
+CFLAGS          =   $(STDFLAG) $(INC) 
 #Linker Flags 
 LDFFLAGS        =   $(LIBS) $(RPATH)
 
 
 #** ALL OBJECTS *************************
 
-ALL_OBJS = $(OBJ_1) #$(OBJ_2) #$(OBJ_3) #$(OBJ_4)
+ALL_OBJS = $(OBJ_1) $(OBJ_2) #$(OBJ_3) #$(OBJ_4)
 
 
 #** TARGETS *****************************
@@ -100,8 +104,8 @@ $(FINAL_EXE): $(ALL_OBJS)
 $(OBJ_1): $(SRC_1)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-#$(OBJ_2): $(SRC_2)
-#	$(CC) $(CFLAGS) -c $< -o $@
+$(OBJ_2): $(SRC_2)
+	$(CC) $(CFLAGS) -c $< -o $@
 
 #$(OBJ_3): $(SRC_3)
 #	$(CC) $(CFLAGS) -c $< -o $@
